@@ -1,7 +1,7 @@
 **busybox**
 ==
 1.```sudo busybox httpd -p 80 -h ./myweb```  
-架設myweb資料夾的檔案到通路80上面  
+架設myweb資料夾的index.html檔案到通路80上面  
 
 2.```ps aux | grep httpd```   
 查詢自己架設網站的代號  
