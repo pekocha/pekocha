@@ -15,18 +15,23 @@
 `name="tasuke's home" 等於 name=tasuke\'s\ home` 利用\跳脫符號，echo出來是一樣的  
 `echo $?` 詢問上一個程式是否成功，成功=0、失敗=1    
 
-
-
-
 **判斷句式**
 ==
 `[ ! -d mybanana ] && mkdir mybanana`  如果mybanana資料夾不存在的話，創建一個同名資料夾  
 `[ ! -f mybanana.sh ] && touch mybanana.sh` 
 如果mybanana.sh不存在的話，創建一個同名檔案，>dev\null 把執行過程正缺輸出或是錯誤輸出都丟到黑洞不顯示
 
+**可輸入多重答案，配合多個結果**
+==
+read -p "number?" ans  
+case $ans in  
+1)  
+echo "1" (;;也可以在這行)  
+;;  
+2)  
+echo "2"(;;也可以在這行)  
+;;  
+*)  
+echo "other"  
 
-
-
-
-
-``=$(); 例如 A=$(ls /home)也等於A=$\`ls /home\`   
+esac  
