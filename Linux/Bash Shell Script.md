@@ -75,4 +75,35 @@ done
 shift 踢掉$1的變數，後面的變數替補上去
 $# 算出總共幾個變數
 
+**無限程式4圈**
+#!/bin/bash
+w=11
+while (($w<=15))
+do
+echo $w'>>>>'
+ x=3
+ while (($x<=5))
+ do
+ echo ''$x'>'
+  y=6
+  while (($y<=8))
+  do
+  echo -n $y':'
+   z=9
+   while (($z <= 13))
+   do
+   echo -n "$z"' '
+   z=$((z+1))
+   done
+   echo
+  y=$((y+1))
+  done
+ x=$((x+1))
+ done
+w=$((w+1))
+done
+
+**無限程式4圈(參數寫法)**
+
+
 
