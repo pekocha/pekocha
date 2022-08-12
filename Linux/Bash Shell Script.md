@@ -35,3 +35,44 @@ echo "2"(;;也可以在這行)
 echo "other"  
 
 esac  
+
+**迴圈程式**
+==
+for ans in a b c d   
+do  
+echo $ans  
+sleep 1  
+done  
+
+**迴圈程式(參數寫法)**
+==
+for ans in $1 $2 $3 $4 或是for ans in $@ $* 可以在執行程式時輸入幾個就有幾個  
+do  
+echo $ans  
+sleep 1  
+done  
+echo $0  
+echo $*  
+echo $#  
+在執行程式時才把變數帶進去  
+例如:./a.sh AAA BBB CCC DDD  
+$0 是程式本身  
+$* 列出全部變數  
+
+**無限程式**
+==
+答出正確答案才停  
+while true   (while true也寫成while:)  
+do  
+
+break  
+  
+done  
+
+答出正確答案1才停，可加continue，可套入if問句程式或是  
+多重答案程式  
+
+shift 踢掉$1的變數，後面的變數替補上去
+$# 算出總共幾個變數
+
+
