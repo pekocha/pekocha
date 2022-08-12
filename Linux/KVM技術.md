@@ -1,6 +1,6 @@
 **KVM**
 ==
-Linus Torvalds linux開發人(Linux 脫襪子)  
+**Linus Torvalds** linux開發人(Linux 脫襪子)  
 
 所以只要是Linux作業系統，一定可以使用KVM這個技術。  
 
@@ -14,3 +14,11 @@ KVM CPU和記憶體是真實的，網路卡硬碟是虛擬的
 硬體輔助虛擬化  
 Intel 的是VT-x  
 AMD的是SVM  
+
+**Hypervisor**
+==
+裸機架構（Bare-Metal）
+作業系統本身就包含虛擬化技術
+寄居架構（Hosted）
+作業系統本身不包含虛擬化技術
+需要額外下載、安裝
