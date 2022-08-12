@@ -15,3 +15,11 @@ root        2207  0.0  0.4   8168  2540 pts/1    S+   04:46   0:00 grep --color=
 
 4.```sudo kill -9 1066```(代號)  
 下架網站，代號可透或查詢得知  
+
+**Alpind虛擬機架站**
+==
+方法跟ubuntu一樣，只是最後上架的命令不同   
+`sudo apk add busybox-extras` 先安裝busybox-extras   
+`sudo busybox-extras httpd -p -80 -h ~/myweb`   
+
+history 之前下過的命令   
