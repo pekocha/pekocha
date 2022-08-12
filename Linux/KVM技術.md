@@ -22,3 +22,16 @@ AMD的是SVM
 寄居架構（Hosted）  
 作業系統本身不包含虛擬化技術  
 需要額外下載、安裝  
+
+
+**無KVM開機(以下請配合巢狀虛擬化😮)  **
+==
+sudo qemu-system-x86_64 -m 2048 \  
+-hda disk/alpine.qcow2 \  
+-nographic  
+
+**KVM開機**
+==  
+sudo kvm -m 2048 \  
+-hda disk/alpine.qcow2 \  
+-nographic  
