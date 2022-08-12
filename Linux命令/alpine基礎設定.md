@@ -6,7 +6,7 @@
 `tree /home` 確定指令是否安裝成功  
 `adduser -s /bin/bash(可使用bash) -h /home/bigred(有家目錄) -D(創建用戶時不創建密碼) bigred(產生bigred帳號)` 辦帳號    
 `addgroup bigred wheel` 把帳號加入wheel群組(SUDO權限)     
-`passwd bigred` (給密碼，可能會說密碼太短太簡單，可忽略)    
+`passwd bigred` 給密碼，可能會說密碼太短太簡單，可忽略    
 `nano /etc/suduers` 找到`# %wheel ALL=(ALL) NOPASSWD: ALL` 前的#刪除加入wheel群的人就有SUDO權限且免密碼    
 `sudo usermod -dl root` 把root帳號停止使用後reboot重開機後使用SUDO帳號操作(root帳號容易被駭客入侵)    
 `sudo nano /etc/network/interfaces` 設定固定網路IP位子，PING時注意防火牆    
