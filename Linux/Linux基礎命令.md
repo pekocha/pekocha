@@ -26,6 +26,10 @@ who指令 -l(清單)-H(標題)-m(當前使用者)-q(簡易顯示)
 PATH=$PATH:~ 設置家目錄在系統路徑裡(最後面)  
 PATH=~:$PATH 設置家目錄在系統路徑裡(最前面)  
 [ "$USER" != "root" ] && exit  不是ROOT或是SUDO身分的話就無法執行程式  
+read -s 不顯示輸入的值  
+read -e 輸入時按兩下tab鍵的話會幫你顯示相關檔案  
+echo "aaaaa" |tee txt  新內容aaaaa覆蓋過去txt檔案  
+echo "bbbbb" |tee -a txt  不覆蓋在後面添加  
 
 **grep**
 ==
