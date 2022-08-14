@@ -44,6 +44,11 @@ echo $ans
 sleep 1  
 done  
 
+for ip in 1 2 3 或是 for ip in `seq 1 3`   
+do  
+done  
+
+
 **迴圈程式(參數寫法)**  
 for ans in $1 $2 $3 $4 或是for ans in $@ $* 可以在執行程式時輸入幾個就有幾個  
 do  
