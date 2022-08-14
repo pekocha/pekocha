@@ -31,6 +31,7 @@ read -e 輸入時按兩下tab鍵的話會幫你顯示相關檔案
 echo "aaaaa" |tee txt  新內容aaaaa覆蓋過去txt檔案  
 echo "bbbbb" |tee -a txt  不覆蓋在後面添加  
 yes 一直不斷丟出y  
+sudo shutdown -h now 馬上關機
 
 **grep**
 ==
