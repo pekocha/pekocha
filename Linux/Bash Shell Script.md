@@ -44,8 +44,7 @@ echo $ans
 sleep 1  
 done  
 
-**迴圈程式(參數寫法)**
-==
+**迴圈程式(參數寫法)**  
 for ans in $1 $2 $3 $4 或是for ans in $@ $* 可以在執行程式時輸入幾個就有幾個  
 do  
 echo $ans  
@@ -58,6 +57,13 @@ echo $#
 例如:./a.sh AAA BBB CCC DDD  
 $0 是程式本身  
 $* 列出全部變數  
+
+**迴圈程式2**  
+for ((n=1;n<=4;n=n+1)) 起始值;限制值;累加值  
+do  
+echo $n  
+done  
+echo end  
 
 **無限程式**
 ==
@@ -73,37 +79,66 @@ done
 多重答案程式  
 
 shift 踢掉$1的變數，後面的變數替補上去
-$# 算出總共幾個變數
+$# 算出總共幾個變數  
 
-**無限程式4圈**
-#!/bin/bash
-w=11
-while (($w<=15))
-do
-echo $w'>>>>'
- x=3
- while (($x<=5))
- do
- echo ''$x'>'
-  y=6
-  while (($y<=8))
-  do
-  echo -n $y':'
-   z=9
-   while (($z <= 13))
-   do
-   echo -n "$z"' '
-   z=$((z+1))
-   done
-   echo
-  y=$((y+1))
-  done
- x=$((x+1))
- done
-w=$((w+1))
-done
+**無限程式4圈**  
+#!/bin/bash   
+w=11  
+while (($w<=15))  
+do  
+echo $w'>>>>'  
+ x=3  
+ while (($x<=5))  
+ do  
+ echo ''$x'>'  
+  y=6  
+  while (($y<=8))  
+  do  
+  echo -n $y':'  
+   z=9  
+   while (($z <= 13))  
+   do  
+   echo -n "$z"' '  
+   z=$((z+1))  
+   done  
+   echo  
+  y=$((y+1))  
+  done  
+ x=$((x+1))  
+ done  
+w=$((w+1))  
+done  
 
-**無限程式4圈(參數寫法)**
-
-
+**無限程式4圈(參數寫法)**   
+#!/bin/bash  
+echo -n "請輸入第1段區間(輸入2組數字): "; read w1 w2  
+echo -n "請輸入第1段區間(輸入2組數字): "; read x1 x2  
+echo -n "請輸入第1段區間(輸入2組數字): "; read y1 y2  
+echo -n "請輸入第1段區間(輸入2組數字): "; read z1 z2  
+w=$w1  
+while (($w<=$w2))  
+do  
+  echo "$w>>>>"  
+  w=$(($w+1))  
+  x=$x1  
+  while (($x<=$x2))  
+  do  
+    echo " $x>"  
+    x=$(($x+1))  
+    y=$y1  
+    while (($y<=$y2))  
+    do  
+      echo -n "  $y:"  
+      z=$z1  
+      while (($z<=$z2))  
+      do  
+        echo -n "$z "  
+        z=$(($z+1))  
+      done  
+      y=$(($y+1))  
+      echo  
+    done  
+  done  
+  echo  
+done   
 
