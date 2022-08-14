@@ -180,3 +180,48 @@ function test {$HOME pwd whoami ; }
 [ $((5%2)) = 1 ]   
 %，計算符號，用來計算餘數  
 一樣的內容，記得(())要使用雙等號==  
+
+**while read 無限閱讀**
+==
+while read var  
+do  
+echo $var  
+done <txt  
+
+把閱讀的內容一行一行放變數，再把他秀出來，  
+可使用done旁邊的方法，或是在開啟檔案時加入 <txt  
+閱讀的內容可以針對變數var做變化    
+
+**while read 無限閱讀變化1**  
+cat txt | while read var   
+do  
+echo $var  
+done   
+
+**while read 無限閱讀變化2**  
+count=1    # 設定陳述式，不加空格  
+cat txt01 | while read var  
+do  
+   echo ${var}  
+   echo ${var//[!a-z]/}  
+   count=$(( $count + 1 ))  
+done  
+echo "finish"  
+exit 0  
+
+做完更正的檔案導出到新檔案  
+
+**陣列**
+==
+var=(1 2 3 4 5)  
+echo ${var[0]} 等於1  
+echo ${var[*]} 呼叫全部1 2 3 4 5  
+echo ${#var[@]} 計算有幾個 5  
+
+**select陣列**  
+select var in ${fruits[@]}  
+do  
+done  
+
+
+
