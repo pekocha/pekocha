@@ -158,12 +158,20 @@ Declare -i a
 #!/bin/bash  
 test()  
 {  
-$HOME  
+echo $HOME  
 pwd  
 whoami  
 }  
 clear  
 test  
+或是  
+function test {$HOME pwd whoami ; }  
 
+自訂函數，內容是一串的命令，後面有加()前面就不用加上function  
 
-
+**計算**
+==
+(( $((5%2)) == 1 ))   
+[ $((5%2)) = 1 ]   
+%，計算符號，用來計算餘數  
+一樣的內容，記得(())要使用雙等號==  
