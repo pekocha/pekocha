@@ -36,6 +36,9 @@ sudo shutdown -h now 馬上關機
 alt shift 3  顯示行數  
 ctrl + /  移動到想去的行數，例如:492  
 
+echo -e "rbean\nrbean" | sudo adduser -s /bin/bash rbean  echo密碼兩次、並\n換行給新創的帳號rbean，rbean使用bash的貝殼程式  
+tty 可以查詢目前自己連線的終端機是第幾台，第一台是/dev/pts/0，在本機輸入會變成tty1
+
 **grep**
 ==
 `grep ^0.0.0.0` 抓取這一行的開頭的0.0.0.0  
