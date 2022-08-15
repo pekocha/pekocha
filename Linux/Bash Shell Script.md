@@ -15,6 +15,13 @@
 `name="tasuke's home" 等於 name=tasuke\'s\ home` 利用\跳脫符號，echo出來是一樣的  
 `echo $?` 詢問上一個程式是否成功，成功=0、失敗=1    
 
+**更改貝殼程式**
+==
+mkdir -p base/{a,b,c}   只有sh的貝殼程式會創建失敗  
+變成單一個資料夾，名稱為{a,b,c}，而不是分別的資料夾a、b、c  
+
+更改貝殼程式，來/etc/passwd用nano更改，登出後登入就生效  
+
 **判斷句式**
 ==
 `[ ! -d mybanana ] && mkdir mybanana`  如果mybanana資料夾不存在的話，創建一個同名資料夾  
