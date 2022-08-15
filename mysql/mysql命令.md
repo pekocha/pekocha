@@ -36,14 +36,45 @@ DELETE FROM s2 WHERE date_format (s2_birthday,'%y')=2002;
 ALTER TABLE Students ADD COLUMN phone varchar(9);      在Students table中新增phone資料型態為varchar(9)  
 ALTER TABLE Students MODIFY COLUMN phone varchar(10);  在Students table中更改phone資料型態為varchar(10)  
 ALTER TABLE Students DROP COLUMN phone;                在Students table中捨棄phone這個資料型態  
-
 ALTER TABLE s2 MODIFY COLUMN gender enum('F' , 'M');   在s2 table中的gender資料型態裡只能輸入F跟M  
 
 **注意修改資料型態時，修改前已存在的資料是否有符合，沒有符合的話無法修改**  
 
 SET SQL_SAFE_UPDATES=0;  取消修改保護限制，0改1就可以打開  
-(避免正確，但是SQL覺得怪怪的、會刪到很多資料的指令)  
+(避免正確，但是SQL覺得怪怪的、會刪到很多資料的指令)    
 
-「SQL Constraints 限制、約束」  
-PRIMARY KEY = NOT NULL (不能是空值) + UNIQUE (不能與他人重複)  
+**國家人口資料練習**  
+SELECT Name, Population FROM country ORDER BY Population DESC LIMIT 5;    
+ORDER BY 排序、DESC 從大到小、LIMIT 5 前五個、人口最多的前 5 個國家  
 
+SELECT Name, Population FROM country ORDER BY Population DESC LIMIT 1 OFFSET 2;  
+OFFSET 2 跳過前兩筆資料，人口第 3 多的國家  
+
+SELECT Name, SurfaceArea FROM country ORDER BY SurfaceArea ASC LIMIT 3;  
+ASC 由小到大(沒輸入ASC也沒差，ORDER BY預設排列由小到大)，列1出土地面積最小的前 3 個國家  
+
+SELECT Name, Continent, Region FROM country WHERE Continent = 'Asia' AND Region='Eastern Asia' LIMIT 5;  
+and 兩個條件的列舉，「或」就使用or，列舉位於 亞洲 東亞 的 5 個國家  
+
+SELECT Name, Continent FROM country WHERE Continent in ('Asia','Antarctica') LIMIT 5;  
+兩個條件的列舉，使用WHERE ... in ...，可運用於更多項目的列舉  
+(找出位於非洲和北美洲在1918年成立的四個國家)  
+
+SELECT Name, Continent FROM country WHERE  Population < 100;  
+大於小於或等於可直接使用符號表示，純數字可以使用 BETWEEN ... AND ...，找出人口數小於 100 國家  
+
+SELECT Name FROM country WHERE Name LIKE 'Ta%';  
+使用like 來表示開頭是Ta符合就好，後面隨便，找名稱開頭是 Ta 的國家  
+
+SELECT Continent FROM country GROUP BY Continent;  
+把國家資料以大陸板塊為單位加進群組(group by)來表示或是使用  
+SELECT DISTINCT Continent FROM country;  
+DISTINCT不重複顯示，找出地球上有哪幾個大陸？  
+
+SELECT Continent, COUNT(*) FROM country GROUP BY Continent;  
+以大陸板塊為單位查詢國家數目  
+
+SELECT Continent, AVG(Population), SUM(Population), MAX(Population), MIN(Population) AS pop_min FROM country GROUP BY Continent;  
+每個大陸上的國家 平均、總、最大、最小人口數？  
+
+...(欄位) as ...(自訂名稱) 欄位名稱變成自己自訂的  
