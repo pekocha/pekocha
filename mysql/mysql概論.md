@@ -63,6 +63,45 @@ I (Isolation): 確保交易過程中是1對1
 D (Durability): 確保交易完成後的數據修改有保留  
 
 
-**SQL Constraints 限制、約束**
+**MYSQL constraint 限制、約束**
 ==
-PRIMARY KEY = NOT NULL (不能是空值) + UNIQUE (不能與他人重複)  
+NOT NULL - 不能為空值  
+UNIQUE - 不可與其他值相同  
+PRIMARY KEY - 不可為空值且不可與其他值相同  
+FOREIGN KEY - 連接至別的table的PRIMARY KEY  
+CHECK - 限制，例如大於小於等等  
+DEFAULT - 在某個資料型態設置一個值，在輸入資料時，此資料型態沒被輸入值的時候，  
+          自動代入DEFAULT設置好的值，但仍可輸入null維持空值(小灰null)  
+CREATE INDEX - 把資料型態放進記憶體，運用二元樹 (Binary tree)運算加快搜尋，最好唯一值像是PRIMARY KEY  
+
+**constraint NOT NULL、NULL**  
+沒設定NOT NULL的話，就會預設NULL  
+
+**constraint PRIMARY KEY**  
+show create table (table名稱);  
+可以看當初創建table時的資訊  
+分辨哪個是primary key、哪些是NOT NULL + UNIQUE  
+
+一個table只能有一個primary key  
+primary key(ID) 或是 primary key(ID,Lastname)  
+ID跟Lastname的組合為唯一這樣  
+那個欄位的值不跟其他欄位重複而且不能為空值  
+
+**constraint FOREIGN KEY**  
+FOREIGN KEY (PersonID) REFERENCES Persons1(ID)  
+本身資料型態PersonID連接到Persons1的primary key的ID  
+
+**constraint FOREIGN KEY刪除方式**  
+1.用show create table去找CONSTRAINT的名稱  
+'Orders', 'CREATE TABLE `Orders` (\n  `OrderID` int(11) NOT NULL,\n  `OrderNumber` int(11) NOT NULL,\n  `PersonID` int(11) DEFAULT NULL,\n  PRIMARY KEY (`OrderID`),\n  KEY `PersonID` (`PersonID`),\n  CONSTRAINT `Orders_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `Persons2` (`ID`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4'
+2.輸入ALTER TABLE drop foregin key Orders_ibfk_1(找到的名稱);  
+
+**constraint cheak**  
+ALTER TABLE Orders add constraint cheak (OrderNumber>=10);  
+增加資料型態限制OrderNumber>=10到Orders的表格裡面  
+
+**constraint DEFAULT**  
+City varchar(255) DEFAULT 'Taiwan'  
+增加DEFAULT，沒填入資料的話就會自動填入Taiwan  
+但在輸入資料時一樣可以填null進去(小灰null)  
+
