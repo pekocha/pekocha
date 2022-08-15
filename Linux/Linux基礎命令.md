@@ -32,6 +32,9 @@ echo "aaaaa" |tee txt  新內容aaaaa覆蓋過去txt檔案
 echo "bbbbb" |tee -a txt  不覆蓋在後面添加  
 yes 一直不斷丟出y  
 sudo shutdown -h now 馬上關機
+**NANO文字編輯指令**
+alt shift 3  顯示行數  
+ctrl + /  移動到想去的行數，例如:492  
 
 **grep**
 ==
