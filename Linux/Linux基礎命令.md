@@ -90,5 +90,10 @@ export kk=kkkkkk 可以把指定的變數往下繼承(可配合source命令)
 在提示號使用時可下傳到每個程式，除非在程式內使用export在往下蓋，  
 但一離開程式，則命令回歸到在提示號下過的(最上層)  
 
-
+**ssh連線設定**
+==
+sudo nano /etc/ssh/sshd_config  
+找到 PasswordAuthentication 改成 yes  
+sudo systemctl stop sshd  
+sudo systemctl start sshd  
 
