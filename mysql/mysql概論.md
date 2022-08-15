@@ -56,3 +56,8 @@ A (Atomicity): 交易只有完全成功或完全失敗
 C (Consistency): 確保交易前後資料庫資料狀態一致  
 I (Isolation): 確保交易過程中是1對1  
 D (Durability): 確保交易完成後的數據修改有保留  
+
+
+**SQL Constraints 限制、約束**
+==
+PRIMARY KEY = NOT NULL (不能是空值) + UNIQUE (不能與他人重複)  
