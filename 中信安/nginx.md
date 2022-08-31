@@ -4,13 +4,13 @@
 
 ## 要求
 
-* [ ] 使用 `yum` 命令安裝 `nginx` 服務
+* [x] 使用 `yum` 命令安裝 `nginx` 服務
 
 ```終端輸入/輸出
 1.yum install nginx
 ```
 
-* [ ] 新增 `www` 使用者並設定 `GID` 、 `UID` 為 `501` ，並將 `nginx` 服務啟動的 `user` 、 `group` 修改為 `www` 使用者。
+* [x] 新增 `www` 使用者並設定 `GID` 、 `UID` 為 `501` ，並將 `nginx` 服務啟動的 `user` 、 `group` 修改為 `www` 使用者。
 
 ```終端輸入/輸出
 1.groupadd -g 501 www
@@ -27,14 +27,19 @@
 (systemctl enable nginx)
 ```
 
-* [ ] 在Yum安裝的 `nginx.conf` 中引入 `/opt/vhost` 資料夾下的虛擬站台相關設定
+* [x] 在Yum安裝的 `nginx.conf` 中引入 `/opt/vhost` 資料夾下的虛擬站台相關設定
 
 ```終端輸入/輸出
-1.include /opt/vhost/web.conf;
+1.nano /etc/nginx/nginx.conf
 
+2.include /opt/vhost/*.conf;
+在http區塊加入這行
+
+3.systemctl reload nginx
+重新載入設定
 ```
 
-* [ ] 在 `/opt/vhost` 下建立名稱 `web.conf` 的虛擬站台設定，站台要求如下（配置參閱Yum安裝的`nginx.conf`）:
+* [x] 在 `/opt/vhost` 下建立名稱 `web.conf` 的虛擬站台設定，站台要求如下（配置參閱Yum安裝的`nginx.conf`）:
     + 站台配置端口 `80`
     + 站台配置名稱 `本機IP`
     + 站台預設文件路徑 `/opt/web`
@@ -69,10 +74,10 @@ SELinux 阻擋連線，要把設定打開
 9.mkdir /opt/web
 
 10.nano /opt/web/index.html
-輸入<h1>Test Web Page</h1>
+輸入<h1>Test Web Page</h1>，並儲存
 ```
 
-* [ ] 在 `/opt/vhost` 下建立名稱 `web_ssl.conf` 的虛擬站台設定，站台要求如下（配置參閱Yum安裝的`nginx.conf`）:
+* [x] 在 `/opt/vhost` 下建立名稱 `web_ssl.conf` 的虛擬站台設定，站台要求如下（配置參閱Yum安裝的`nginx.conf`）:
     + 站台配置端口 `443` 
     + 站台配置名稱 `本機IP`
     + 站台設定加密連線，使用自簽憑證
@@ -116,9 +121,22 @@ req：使用 X.509 Certificate Signing Request（CSR） Management 產生憑證�
 
 10.netstat -ntpl 
 查看端口
+
+11.nano /opt/vhost/web_ssl.conf
+在server添加以下四行，並刪除80port
+listen 443 ssl default_server;
+listen [::]:443 ssl default_server;
+ssl_certificate /etc/nginx/ssl/nginx.crt;
+ssl_certificate_key /etc/nginx/ssl/nginx.key;
+
+12.systemctl reload nginx
+
+12.開啟網頁連線會顯示不安全的憑證，是因為憑證授權的問題，由於我們使用的憑證是自行簽署的，所以這個憑證授權的警告是一定會出現的。
+
+
 ```
 
-* [ ] 請列出以下相關指令：
+* [x] 請列出以下相關指令：
     + 檢查 `nginx` 設定檔：
     + 啟動 `nginx`：
     + 停止 `nginx`：
@@ -132,13 +150,13 @@ systemctl reload nginx
 ---
 ## 额外项目
 
-* [ ] 從系統指令顯示Nginx版本號
+* [x] 從系統指令顯示Nginx版本號
 
 ```終端輸入/輸出
-nginx -V
+nginx -v
 ```
 
-* [ ] 查詢Http狀態碼 200、301、302、304、401、403、404、500、502、504 各自代表意義
+* [x] 查詢Http狀態碼 200、301、302、304、401、403、404、500、502、504 各自代表意義
 
 ```答案
 200 OK
