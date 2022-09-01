@@ -8,6 +8,9 @@
 
 ```終端輸入/輸出
 1.yum install nginx
+下載nginx
+2.yum info nginx
+查看下載下來的nginx的資訊
 ```
 
 * [x] 新增 `www` 使用者並設定 `GID` 、 `UID` 為 `501` ，並將 `nginx` 服務啟動的 `user` 、 `group` 修改為 `www` 使用者。
@@ -59,21 +62,15 @@ SELinux 阻擋連線，要把設定打開
 4.mkdir -p  /opt/logs/nginx/
 創建資料夾
 
-5.touch /opt/logs/nginx/web_error.log
-創建錯誤log檔
-
-6.touch /opt/logs/nginx/web_access.log
-創建操作log檔
-
-7.mkdir /opt/vhost
+5.mkdir /opt/vhost
 創建vhost資料夾
 
-8.cp /etc/nginx/nginx.conf /opt/vhost/web.conf
+6.cp /etc/nginx/nginx.conf /opt/vhost/web.conf
 複製原本的設定檔做修改
 
-9.mkdir /opt/web
+7.mkdir /opt/web
 
-10.nano /opt/web/index.html
+8.nano /opt/web/index.html
 輸入<h1>Test Web Page</h1>，並儲存
 ```
 
@@ -90,21 +87,15 @@ SELinux 阻擋連線，要把設定打開
 1.cp /etc/nginx/nginx.conf /opt/vhost/web_ssl.conf
 複製設定檔修改
 
-2.touch /opt/logs/nginx/web_ssl_access.log
-創建操作log檔
+2.mkdir /opt/web_ssl
 
-3.touch /opt/logs/nginx/web_ssl_error.log
-創建錯誤log檔
-
-4.mkdir /opt/web_ssl
-
-5.nano /opt/web_ssl/index.html
+3.nano /opt/web_ssl/index.html
 輸入<h1>Test Web SSL Page</h1>
 
-6.mkdir /etc/nginx/ssl
+4.mkdir /etc/nginx/ssl
 建立一個放置憑證的目錄
 
-7.openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+5.openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
 
 req：使用 X.509 Certificate Signing Request（CSR） Management 產生憑證。
 -x509：建立自行簽署的憑證。
@@ -114,24 +105,24 @@ req：使用 X.509 Certificate Signing Request（CSR） Management 產生憑證�
 -keyout：設定金鑰儲存的位置。
 -out：設定憑證儲存的位置。
 
-8.firewall-cmd --zone=public --permanent --add-service=https
-開啟https 403 端口
+6.firewall-cmd --zone=public --permanent --add-service=https
+開啟https 443 端口
 
-9.firewall-cmd --reload
+7.firewall-cmd --reload
 
-10.netstat -ntpl 
-查看端口
+8.netstat -ntpl 
+查看tcp端口
 
-11.nano /opt/vhost/web_ssl.conf
+9.nano /opt/vhost/web_ssl.conf
 在server添加以下四行，並刪除80port
 listen 443 ssl default_server;
 listen [::]:443 ssl default_server;
 ssl_certificate /etc/nginx/ssl/nginx.crt;
 ssl_certificate_key /etc/nginx/ssl/nginx.key;
 
-12.systemctl reload nginx
+10.nginx -s reload
 
-12.開啟網頁連線會顯示不安全的憑證，是因為憑證授權的問題，由於我們使用的憑證是自行簽署的，所以這個憑證授權的警告是一定會出現的。
+11.開啟網頁連線會顯示不安全的憑證，是因為憑證授權的問題，由於我們使用的憑證是自行簽署的，所以這個憑證授權的警告是一定會出現的。
 
 
 ```
@@ -142,10 +133,11 @@ ssl_certificate_key /etc/nginx/ssl/nginx.key;
     + 停止 `nginx`：
     + 重新載入 `nginx` 設定檔：
 ```
-chkconfig nginx
-systemctl start nginx
-systemctl stop nginx
-systemctl reload nginx
+nginx -t
+檢查 nginx 設定檔
+nginx -c /etc/nginx/nginx.conf
+nginx -s stop
+nginx -s reload
 ```
 ---
 ## 额外项目
@@ -188,4 +180,9 @@ nginx -v
 
 504 Gateway Timeout
 作為閘道器或者代理工作的伺服器嘗試執行請求時，未能及時從上游伺服器（URI標識出的伺服器，例如HTTP、FTP、LDAP）或者輔助伺服器（例如DNS）收到回應。
+
+------------------------------------------
+
+444 No Response
+Nginx上HTTP伺服器擴展。伺服器不向客戶端返回任何資訊，並關閉連接（有助於阻止惡意軟體）。
 ```
